@@ -4,19 +4,20 @@ import Header from './components/Header'
 import { Input } from './components/ui/input'
 
 
+
 type graduacionType = {
-  esf?: number | null;
-  cil?: number | null;
-  eje?: number | null;
+  esf?: any | null;
+  cil?: any | null;
+  eje?: any | null;
 }
 
 function App() {
-  const [gradOD, setGradOD] = useState<graduacionType>()
-  const [gradOI, setGradOI] = useState<graduacionType>()
+  const [gradOD, setGradOD] = useState<graduacionType>({})
+  const [gradOI, setGradOI] = useState<graduacionType>({})
 
 
-  const [calculoOD, setCalculoOD] = useState<graduacionType>()
-  const [calculoOI, setCalculoOI] = useState<graduacionType>()
+  const [calculoOD, setCalculoOD] = useState<graduacionType>({})
+  const [calculoOI, setCalculoOI] = useState<graduacionType>({})
 
 
   const idEsfD = useId()
@@ -33,7 +34,7 @@ function App() {
       const eceD = Calcular(gradOD)
 
       if (!eceD) {
-        setCalculoOD({})
+        setCalculoOD({esf:null, cil:null, eje:null})
 
 
       } else {
@@ -42,20 +43,20 @@ function App() {
       }
     } catch (error) {
 
-      setCalculoOD({})
+      setCalculoOD({esf:null, cil:null, eje:null})
     }
 
     try {
       const eceI = Calcular(gradOI)
       if (!eceI) {
-        setCalculoOI({})
+        setCalculoOI({esf:null, cil:null, eje:null})
 
       } else {
         setCalculoOI({ esf: eceI.esfera, cil: eceI.cilindro, eje: eceI.eje })
       }
 
     } catch (error) {
-      setCalculoOI({})
+      setCalculoOI({esf:null, cil:null, eje:null})
 
     }
 
@@ -64,6 +65,7 @@ function App() {
   const Calcular = (graduacion: graduacionType) => {
     const { esf, cil, eje } = graduacion
     // console.log({ esf }, { cil }, { eje })
+ 
     if (isNaN(+esf) || isNaN(+cil) || isNaN(+eje)) return
 
 
